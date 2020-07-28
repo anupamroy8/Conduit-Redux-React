@@ -2,8 +2,14 @@ import { createStore, combineReducers } from "redux";
 import userReducer from "./reducers/user";
 import articleReducer from "./reducers/article";
 import tagReducer from "./reducers/tag";
+import singleArticleReducer from "./reducers/singleArticle";
 
-let rootReducer = combineReducers({ userReducer, articleReducer, tagReducer });
+let rootReducer = combineReducers({
+  userReducer,
+  articleReducer,
+  tagReducer,
+  singleArticleReducer,
+});
 
 const store = createStore(
   rootReducer /* preloadedState, */,

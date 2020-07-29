@@ -39,7 +39,7 @@ const AuthHeader = ({ username, image }) => {
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         New Post
       </NavLink>
-      <NavLink to="/login" activeClassName="active">
+      <NavLink to="/settings" activeClassName="active">
         <i class="fa fa-cog" aria-hidden="true"></i>
         Settings
       </NavLink>

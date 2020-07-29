@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-class NewPost extends Component {
+class EditPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -9,6 +10,11 @@ class NewPost extends Component {
       body: "",
       tagList: "",
     };
+  }
+  componentDidMount() {
+    const { title, body, description, tagList } = this.props.article;
+
+    this.setState({ title, body, description, tagList });
   }
 
   handleInput = ({ target: { name, value } }) => {
@@ -19,10 +25,12 @@ class NewPost extends Component {
     this.setState({ [name]: value });
   };
   handleSubmit = (e) => {
+    let { slug } = this.props.match.params;
+    console.log(slug);
     e.preventDefault();
-    let url = "https://conduit.productionready.io/api/articles";
+    let url = `https://conduit.productionready.io/api/articles/${slug}`;
     fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         authorization: `Token ${localStorage.authToken}`,
@@ -30,13 +38,14 @@ class NewPost extends Component {
       body: JSON.stringify({ article: this.state }),
     }).then((res) => {
       if (res.status === 200) {
-        this.props.history.push("/");
+        this.props.history.goBack();
       }
       return res.json();
     });
   };
 
   render() {
+    let { description, title, tagList, body } = this.state;
     return (
       <div>
         <form className="formcontainer">
@@ -48,6 +57,7 @@ class NewPost extends Component {
               id="exampleFormControlInput1"
               placeholder="Article Title"
               onChange={this.handleInput}
+              value={title}
             />
           </div>
           <div className="form-group">
@@ -58,6 +68,7 @@ class NewPost extends Component {
               id="exampleFormControlInput1"
               placeholder="What's this article about?"
               onChange={this.handleInput}
+              value={description}
             />
           </div>
           <div className="form-group">
@@ -68,6 +79,7 @@ class NewPost extends Component {
               rows="5"
               placeholder="Write your article"
               onChange={this.handleInput}
+              value={body}
             ></textarea>
           </div>
           <div className="form-group">
@@ -78,6 +90,7 @@ class NewPost extends Component {
               id="exampleFormControlInput1"
               placeholder="Enter tags"
               onChange={this.handleInput}
+              value={tagList}
             />
           </div>
           <button
@@ -85,7 +98,7 @@ class NewPost extends Component {
             type="submit"
             onClick={(e) => this.handleSubmit(e)}
           >
-            Publish Article
+            Edit Article
           </button>
         </form>
       </div>
@@ -93,4 +106,10 @@ class NewPost extends Component {
   }
 }
 
-export default NewPost;
+function mapStateToProps(state) {
+  return {
+    article: state.singleArticleReducer.article,
+  };
+}
+
+export default connect(mapStateToProps)(EditPost);

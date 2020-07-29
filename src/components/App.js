@@ -7,6 +7,8 @@ import Signup from "./Signup";
 import Error from "./Error";
 import Loader from "./Loader";
 import NewPost from "./NewPost";
+import EditPost from "./EditPost";
+import Settings from "./Settings";
 import SingleArticle from "./SingleArticle";
 import { setUser } from "../store/actions";
 import { connect } from "react-redux";
@@ -46,6 +48,8 @@ class App extends React.Component {
           <Route path="/register" component={Signup} />
           <Route path="/newpost" component={NewPost} />
           <Route path="/article/:slug" component={SingleArticle} />
+          <Route path="/editor/:slug" component={EditPost} />
+          <Route path="/settings" component={Settings} />
           <Route component={Error} />
         </Switch>
         <Footer />

@@ -42,6 +42,10 @@ class Articles extends React.Component {
     }
   };
 
+  // handleLike = () => {
+  //   url = `https://conduit.productionready.io/api/articles/test-1-cypress-oi65qz/favorite`;
+  // };
+
   render() {
     return (
       <>
@@ -90,7 +94,10 @@ class Articles extends React.Component {
                             </div>
                           </div>
                           <div className="likes">
-                            <button className="likeBtn btn btn-light">
+                            <button
+                              className="likeBtn btn btn-light"
+                              // onClick={this.handleLike}
+                            >
                               {" "}
                               ❤️ {data.favoritesCount}
                             </button>
@@ -103,7 +110,9 @@ class Articles extends React.Component {
                             </NavLink>
                           </h1>
                           <p>{data.body}</p>
-                          <span>Readmore...</span>
+                          <NavLink to={`/article/${data.slug}`}>
+                            Readmore...
+                          </NavLink>
                           <ul className="taglist">
                             {data.tagList
                               ? data.tagList.map((tag) => {
@@ -134,10 +143,11 @@ class Articles extends React.Component {
   }
 }
 
-const mapStateToProps = ({ articleReducer, tagReducer }) => {
+const mapStateToProps = ({ articleReducer, tagReducer, userReducer }) => {
   return {
     articles: articleReducer.articles,
     tags: tagReducer.tags,
+    user: userReducer.user,
   };
 };
 

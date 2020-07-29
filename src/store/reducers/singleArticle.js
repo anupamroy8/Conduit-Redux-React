@@ -5,7 +5,7 @@ import {
 
 const INITIAL_STATE = {
   article: {},
-  comments: {},
+  comments: [],
 };
 
 const singleArticleReducer = (state = INITIAL_STATE, action) => {

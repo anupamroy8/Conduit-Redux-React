@@ -220,6 +220,17 @@ i {
 .left {
   text-align: left;
 }
+.right {
+  text-align: right;
+}
 .marginLeft {
+  margin-left: 20px;
+}
+.black {
+  color: #000000;
+}
+.leftWithMargin {
+  padding: 1rem 0;
+  text-align: left;
   margin-left: 20px;
 }
